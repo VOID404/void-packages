@@ -1,0 +1,42 @@
+# Template file for 'firefox-pwa-bin'
+pkgname=firefox-pwa-bin
+version=2.1.2
+revision=2
+#archs="i686 x86_64"
+#wrksrc=
+#create_wrksrc=yes
+build_style=fetch
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends="binutils>=2.35 tar xz sed"
+makedepends=""
+depends="firefox"
+short_desc="firefox pwa extension helper"
+maintainer="Wojciech Nawa <wojciech.nawa@gmail.com>"
+license="MPL-2.0"
+homepage="https://github.com/filips123/PWAsForFirefox"
+#changelog=""
+distfiles="https://github.com/filips123/PWAsForFirefox/releases/download/v${version}/firefoxpwa_${version}_amd64.deb"
+checksum="34d9a22c7a8bc1619cebba87ea100fb0bbe526afb755b5eb9e5135a532a063e3"
+
+do_extract() {
+    ar x "${XBPS_SRCDISTDIR}/${pkgname}-${version}/firefoxpwa_${version}_amd64.deb"
+    tar xf "data.tar.xz"
+}
+
+do_patch() {
+    sed -i "s@/usr/libexec/firefoxpwa-connector@/usr/lib/firefoxpwa/firefoxpwa-connector@g" usr/lib/mozilla/native-messaging-hosts/firefoxpwa.json
+
+    mkdir -p usr/lib/firefoxpwa/
+    mv usr/libexec/firefoxpwa-connector usr/lib/firefoxpwa/
+
+    rm -rf usr/lib64/
+    rm -rf usr/libexec/
+}
+
+do_install() {
+    cp -r usr "${DESTDIR}/"
+}
