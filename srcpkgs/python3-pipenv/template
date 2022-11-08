@@ -1,6 +1,6 @@
 # Template file for 'python3-pipenv'
 pkgname=python3-pipenv
-version=2022.10.4
+version=2022.11.5
 revision=1
 wrksrc="pipenv-${version}"
 build_style=python3-pep517
@@ -12,7 +12,7 @@ license="MIT"
 homepage="https://github.com/pypa/pipenv"
 changelog="https://github.com/pypa/pipenv/blob/main/CHANGELOG.rst"
 distfiles="${PYPI_SITE}/p/pipenv/pipenv-${version}.tar.gz"
-checksum=dc2539c7f4ad10737f6c211493f99e2bbc8161571d71ac29f162dfed86886bb0
+checksum=af8595e38f1d87af3b00d209390bce41c97b10fca1c956e9ba1208438af55c6a
 conflicts="python-pipenv>=0"
 make_check=no # tests are not contained in release tarball
 
